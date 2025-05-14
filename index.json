@@ -38,6 +38,17 @@
       "libVer": "1.0.0",
       "md5": "0ce8dc254c1d15186838f6b7a6f3b7ab698c6a11fc141a17e7813fd685029645",
       "type": "LuaScript"
+    },
+    {
+      "id":1403038472,
+      "name": "SpaceBattles",
+      "fileName": "SpaceBattles",
+      "imageURL": "",
+      "lang": "en",
+      "ver": "1.1.1",
+      "libVer": "1.0.0",
+      "md5": "73cded151e8b1d59a23a78f8717f711c",
+      "type": "LuaScript"
     }
   ],
   "styles": [],
