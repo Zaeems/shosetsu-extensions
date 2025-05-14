@@ -34,14 +34,24 @@ local site = Require("XenForo")("https://forums.spacebattles.com/", {
 
 local originalGetPassage = site.getPassage
 site.getPassage = function(self, url)
-    local page = originalGetPassage(self, url)
+    local doc = GETDocument(self:expandURL(url, KEY_CHAPTER_URL))
+    local id = url:match("#(.+)$")
+    local post = doc:selectFirst("#js-" .. id)
+    if not post then return nil end
 
-    local html = page:html()
-    html = html:gsub("Click to shrink%.%.%.", "")
-    html = html:gsub("Click to expand%.%.%.", "")
-    page:setHTML(html)
+    local message = post:selectFirst(".bbWrapper")
+    if not message then return nil end
 
-    return page
+    -- Clean up unwanted toggle text
+    for _, el in ipairs(message:select("span")) do
+        local txt = el:text()
+        if txt == "Click to shrink..." or txt == "Click to expand..." then
+            el:remove()
+        end
+    end
+
+    message:prepend("<h1>" .. post:selectFirst(".threadmarkLabel"):text() .. "</h1>")
+    return pageOfElem(message, true)
 end
 
 return site
