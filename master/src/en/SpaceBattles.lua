@@ -34,32 +34,14 @@ local site = Require("XenForo")("https://forums.spacebattles.com/", {
 
 local originalGetPassage = site.getPassage
 site.getPassage = function(self, url)
-    local page = originalGetPassage(self, url)
-    if not page then return nil end
+    local html = originalGetPassage(self, url)
+    if type(html) ~= "string" then return html end
 
-    -- Try to call page:html() safely
-    local html
-    if type(page) == "table" and type(page.html) == "function" then
-        html = page:html()
-        html = html
-            :gsub("Click to shrink%.%.%.", "")
-            :gsub("Click to expand%.%.%.", "")
-        if type(page.setHTML) == "function" then
-            page:setHTML(html)
-        end
-        return page
-    end
+    html = html
+        :gsub("Click to shrink%.%.%.", "")
+        :gsub("Click to expand%.%.%.", "")
 
-    -- Fallback: check for a content field
-    if type(page.content) == "string" then
-        page.content = page.content
-            :gsub("Click to shrink%.%.%.", "")
-            :gsub("Click to expand%.%.%.", "")
-    end
-
-    return page
+    return html
 end
-
-
 
 return site
