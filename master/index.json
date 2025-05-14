@@ -18,28 +18,6 @@
   "libraries": [],
   "scripts": [
     {
-      "id": 96201,
-      "name": "Ranobes (TOP)",
-      "fileName": "Ranobes",
-      "imageURL": "https://github.com/bigrand/shosetsu-extensions/raw/master/icons/ranobes.png",
-      "lang": "en",
-      "ver": "1.0.4",
-      "libVer": "1.0.0",
-      "md5": "462650e653a115e6902d345fcf9df3259d7131c74792d5efc1b0c790b79502e9",
-      "type": "LuaScript"
-    },
-    {
-      "id": 96203,
-      "name": "Ranobes (MTL)",
-      "fileName": "RanobesMTL",
-      "imageURL": "https://github.com/bigrand/shosetsu-extensions/raw/master/icons/ranobes.png",
-      "lang": "en",
-      "ver": "1.0.3",
-      "libVer": "1.0.0",
-      "md5": "0ce8dc254c1d15186838f6b7a6f3b7ab698c6a11fc141a17e7813fd685029645",
-      "type": "LuaScript"
-    },
-    {
       "id":1403038472,
       "name": "SpaceBattles",
       "fileName": "SpaceBattles",
