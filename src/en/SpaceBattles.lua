@@ -34,14 +34,14 @@ local site = Require("XenForo")("https://forums.spacebattles.com/", {
 
 local originalGetPassage = site.getPassage
 site.getPassage = function(self, url)
-    local page = originalGetPassage(self, url)
+    local html = originalGetPassage(self, url)
+    if type(html) ~= "string" then return html end
 
-    local html = page:html()
-    html = html:gsub("Click to shrink%.%.%.", "")
-    html = html:gsub("Click to expand%.%.%.", "")
-    page:setHTML(html)
+    html = html
+        :gsub("Click to shrink%.%.%.", "")
+        :gsub("Click to expand%.%.%.", "")
 
-    return page
+    return html
 end
 
 return site
