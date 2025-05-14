@@ -37,8 +37,8 @@ site.getPassage = function(self, url)
     local page = originalGetPassage(self, url)
 
     local html = page:html()
-    html = html:gsub("Click here to shrink%.%.%.", "")
-    html = html:gsub("Click here to expand%.%.%.", "")
+    html = html:gsub("Click to shrink%.%.%.", "")
+    html = html:gsub("Click to expand%.%.%.", "")
     page:setHTML(html)
 
     return page
