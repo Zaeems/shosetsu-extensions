@@ -37,31 +37,29 @@ site.getPassage = function(self, url)
     local page = originalGetPassage(self, url)
     if not page then return nil end
 
-    -- Try to detect and clean HTML if possible
-    local success, html = pcall(function()
-        return page:html and page:html()
-    end)
-
-    if success and html and type(html) == "string" then
-        html = html:gsub("Click to shrink%.%.%.", "")
-        html = html:gsub("Click to expand%.%.%.", "")
-        if page.setHTML then
+    -- Try to call page:html() safely
+    local html
+    if type(page) == "table" and type(page.html) == "function" then
+        html = page:html()
+        html = html
+            :gsub("Click to shrink%.%.%.", "")
+            :gsub("Click to expand%.%.%.", "")
+        if type(page.setHTML) == "function" then
             page:setHTML(html)
         end
         return page
     end
 
-    -- Fallback: look for a `content` field and clean it
-    if type(page) == "table" and type(page.content) == "string" then
+    -- Fallback: check for a content field
+    if type(page.content) == "string" then
         page.content = page.content
             :gsub("Click to shrink%.%.%.", "")
             :gsub("Click to expand%.%.%.", "")
-        return page
     end
 
-    -- Final fallback: return as-is if no modification possible
     return page
 end
+
 
 
 return site
